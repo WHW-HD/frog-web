@@ -6,11 +6,13 @@ import express from 'express'
 import mustacheExpress from 'mustache-express'
 import sqliteModule from 'sqlite3'
 import expressWsBuilder from 'express-ws'
+import solarCalc from 'solar-calc'
 
 import moment from 'moment'
 
 const client = mqtt.connect('mqtt://test.mosquitto.org')
 const app = express()
+moment.locale("de")
 
 const sqlite = sqliteModule.verbose()
 
@@ -40,7 +42,22 @@ const connectedClients = {}
 
 const echoHandler = echoHandlerBuilder(db, connectedClients)
 
-app.get('/', (req, res) => res.render('index'))
+const LAT = 49.4101028
+const LON = 8.6821984
+const solarCalcProperties = ["sunrise", "sunset", "solarNoon", "nauticalDusk", "nauticalDawn", "civilDawn", "civilDusk", "astronomicalDusk", "astronomicalDawn"]
+
+app.get('/', (req, res) => {
+	const sc = new solarCalc(new Date(), LAT, LON) 
+	const now = moment()
+	const data = {}
+	for (let prop of solarCalcProperties) {
+		const date = moment(sc[prop])
+		data[prop] = date.format("HH:mm")
+		data[prop+"_diff"] = date.isBefore(now) ? date.toNow() : date.fromNow()
+	}
+	data["date"] = moment().format("DD. MMM YYYY")
+	res.render('index', data ) 
+})
 app.get('/chartdata/anemo', charts.builder(db, charts.TYPE_ANEMO))
 app.get('/chartdata/vane', charts.builder(db, charts.TYPE_VANE))
 app.get('/chartdata/rain', charts.builder(db, charts.TYPE_RAIN))
