@@ -1,0 +1,10 @@
+{
+  "extends": ["eslint:recommended"],
+  "parser": "babel-eslint",
+  "env": { 
+    "node": true 
+  },
+  "rules": {
+    "indent": ["warn", 2] // warn on indentation problems, use 2 spaces for indentation
+  }
+}
