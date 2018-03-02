@@ -5,6 +5,9 @@
     "node": true 
   },
   "rules": {
-    "indent": ["warn", 2] // warn on indentation problems, use 2 spaces for indentation
+    "indent": ["warn", 2], // warn on indentation problems, use 2 spaces for indentation
+    "no-console": 0, // allow usage of "console" object for logging
+    "linebreak-style": ["warn", "unix"], // use "\n" for line breaks
+    "brace-style": [1, "stroustrup"] // start of "else" blocks on a new line
   }
 }
