@@ -36,16 +36,15 @@ const solarCalcProperties = [
 ]
 
 app.get('/', (req, res) => {
-  const sc = new solarCalc(new Date(), LAT, LON)
-  const now = moment()
-  const data = {}
-  for (const prop of solarCalcProperties) {
-    const date = moment(sc[prop])
-    data[prop] = date.format('HH:mm')
-    data[prop + '_diff'] = date.isBefore(now) ? date.toNow() : date.fromNow()
-  }
-  data['date'] = moment().format('DD. MMM YYYY')
-  res.render('index', data)
+	const sc = new solarCalc(new Date(), LAT, LON) 
+	const data = {}
+	for (let prop of solarCalcProperties) {
+		const date = moment(sc[prop])
+		data[prop] = date.format("DD.MM, HH:mm")
+		data[prop+"_diff"] = date.fromNow()
+	}
+	data["date"] = moment().format("DD. MMM YYYY")
+	res.render('index', data ) 
 })
 app.get('/chartdata/anemo', charts.builder(db, charts.TYPE_ANEMO))
 app.get('/chartdata/vane', charts.builder(db, charts.TYPE_VANE))
