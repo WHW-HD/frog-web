@@ -1,4 +1,5 @@
 package-lock.json
 node_modules
 db/anemo.db
+db/anemo.db-journal
 dist/bundle.js
