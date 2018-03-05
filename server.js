@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
     data[prop + '_diff'] = date.fromNow()
   }
   data['date'] = moment().format('DD. MMM YYYY')
-  data.sunsetHeader = `Sonnenauf- und Untergang für  
+  data.sunsetHeader = `Sonnenauf- und Untergang für
   <a href="http://maps.google.de/maps?q=${LAT},${LON}"    target="_blank"> Heidelberg
   </a>, den ${data.date}`
   res.render('index', data)
@@ -59,6 +59,7 @@ app.get('/chartdata/rain', charts.builder(db, chartsDefinition.TYPE_RAIN))
 
 app.ws('/echo', echoHandler)
 app.use('/static', express.static('dist'))
+app.use('/styles', express.static(__dirname + '/styles'))
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
