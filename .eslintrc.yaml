@@ -1,0 +1,17 @@
+root: true
+extends: eslint:recommended
+parser: "babel-eslint"
+env:
+  node: true 
+rules:
+  indent: 
+    - warn
+    - 2 # use 2 spaces for indentation
+  no-console: 
+    - off # allow usage of "console" object for logging
+  linebreak-style: 
+    - warn
+    - "unix" # use "\n" for line breaks
+  brace-style: 
+    - warn
+    - "stroustrup" # start of "else" blocks on a new line
