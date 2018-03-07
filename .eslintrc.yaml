@@ -3,6 +3,7 @@ extends: eslint:recommended
 parser: "babel-eslint"
 env:
   node: true 
+  jquery: true
 rules:
   indent: 
     - warn
