@@ -9,7 +9,8 @@
     "watch": "watchify web/index.js -o dist/bundle.js -t babelify --debug --verbose",
     "dev": "run-p watch server",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
+    "lint-fix": "eslint . --fix",
+    "check-vulnerabilities": "snyk test"
   },
   "dependencies": {
     "babel-eslint": "^8.2.2",
@@ -33,6 +34,7 @@
     "browserify": "^16.1.0",
     "eslint": "^4.18.2",
     "npm-run-all": "^4.1.2",
+    "snyk": "^1.69.10",
     "watchify": "^3.10.0"
   },
   "author": "Felix Gonschorek <felix@netzgut.net>",
