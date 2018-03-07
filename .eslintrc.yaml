@@ -5,14 +5,16 @@ env:
   node: true 
   jquery: true
 rules:
-  indent: 
-    - warn
-    - 2 # use 2 spaces for indentation
-  no-console: 
-    - off # allow usage of "console" object for logging
-  linebreak-style: 
-    - warn
-    - "unix" # use "\n" for line breaks
   brace-style: 
     - warn
     - "stroustrup" # start of "else" blocks on a new line
+  indent: 
+    - warn
+    - 2 # use 2 spaces for indentation
+  linebreak-style: 
+    - warn
+    - "unix" # use "\n" for line breaks
+  no-console: 
+    - off # allow usage of "console" object for logging
+  no-unused-vars:
+    - warn
