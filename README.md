@@ -1,6 +1,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/build.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/WHW-HD/frog-web/badge.svg)](https://snyk.io/test/github/WHW-HD/frog-web)
 
 # frog-web - Webserver und Datenbank für den WHW Wetterfrosch
 
