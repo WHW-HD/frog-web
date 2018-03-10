@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run lint",
     "server": "babel-node server.js",
     "watch": "watchify web/index.js -o dist/bundle.js -t babelify --debug --verbose",
     "dev": "run-p watch server",
