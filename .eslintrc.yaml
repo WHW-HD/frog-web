@@ -1,5 +1,9 @@
 root: true
-extends: eslint:recommended
+plugins:
+  - security
+extends: 
+  - eslint:recommended
+  - plugin:security/recommended
 parser: "babel-eslint"
 env:
   node: true 
