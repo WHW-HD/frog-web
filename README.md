@@ -79,6 +79,6 @@ npm install
 npm run dev
 ~~~
 
-Dieser Befehl startet einene Webserver auf Port 3000 auf dem man dann die Daten sehen kann: `http://localhost:3000
+Dieser Befehl startet einene Webserver auf Port 3000 auf dem man dann die Daten sehen kann: <http://localhost:3000>
 
 Viel Spaß!
