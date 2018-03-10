@@ -37,20 +37,20 @@ __frog__ ist ein in golang geschriebenes Programm, welches auf der Wetterstation
 - Windgeschwindigkeit (Anemometer)
 - Windrichtung (Windvane) und
 - Regen
- 
+
 Weitere Sensoren die wir gerne noch hinzufügen würden:
 
 - Temperatur Luft
 - Temperatur Wasser
 - Barometer
 - Webcam?
- 
+
 Die Daten der Sensoren werden erfasst und dann über MQTT (MQTT ist ein de-facto Standard für IoT devices, [hier](https://www.youtube.com/watch?v=EIxdz-2rhLs) eine 5-Minuten Erklärung auf YouTube) an einen Broker gesendet.
 
 In der Testphase verwenden wir noch den Public-Broker von test.mosquitto.org
 
 Die Sensordaten werden in die Channels
- 
+
 ~~~
 const TOPIC_WINDVANE = "anemo/windvane"
 const TOPIC_ANEMO    = "anemo/anemo"
@@ -79,6 +79,6 @@ npm install
 npm run dev
 ~~~
 
-Dieser Befehl startet einene Webserver auf Port 3000 auf dem man dann die Daten sehen kann: http://localhost:3000
+Dieser Befehl startet einene Webserver auf Port 3000 auf dem man dann die Daten sehen kann: `http://localhost:3000
 
 Viel Spaß!
