@@ -4,6 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/77fd1061c8d28af970e7/maintainability)](https://codeclimate.com/github/WHW-HD/frog-web/maintainability)
 [![Code Coverage](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/WHW-HD/frog-web/badge.svg)](https://snyk.io/test/github/WHW-HD/frog-web)
+[![Dependencies](https://david-dm.org/WHW-HD/frog-web.svg)](https://david-dm.org/WHW-HD/frog-web.svg)
 
 # frog-web - Webserver und Datenbank für den WHW Wetterfrosch
 
