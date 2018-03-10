@@ -1,6 +1,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/build.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/build-status/master)
 [![Build Status](https://travis-ci.org/WHW-HD/frog-web.svg?branch=master)](https://travis-ci.org/WHW-HD/frog-web)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/77fd1061c8d28af970e7/maintainability)](https://codeclimate.com/github/WHW-HD/frog-web/maintainability)
 [![Code Coverage](https://scrutinizer-ci.com/g/WHW-HD/frog-web/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WHW-HD/frog-web/?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/WHW-HD/frog-web/badge.svg)](https://snyk.io/test/github/WHW-HD/frog-web)
 
