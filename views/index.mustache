@@ -10,7 +10,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="/styles/anemo.css">
+  <link rel="stylesheet" href="/public/styles/anemo.css">
 
   <title>WHW/SVH Anemometer</title>
 </head>
@@ -23,6 +23,9 @@
       </li>
       <li>
         <a href="#anemo">Aktuelles Wetter</a>
+      </li>
+      <li>
+        <a href="#statics">Windstatistiken</a>
       </li>
       <li>
         <a href="#vorhersage">Vorhersage</a>
@@ -39,6 +42,11 @@
     <div id="anemo" class="row">
       {{> partials/anemo}}
     </div>
+
+    <div id="statistics" class="row">
+      {{> partials/statistics}}
+    </div>
+
 
     <div id="vorhersage">
       {{> partials/forecast}}
@@ -58,6 +66,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
   <script src="static/bundle.js"></script>
+  <script src="public/js/toggler.js"></script>
 
 </body>
 

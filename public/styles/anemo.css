@@ -20,3 +20,7 @@ nav li {
   text-align: center;
   flex: 1;
 }
+
+div.hidediv {
+  display: none
+}
