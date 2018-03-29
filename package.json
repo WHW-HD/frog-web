@@ -10,8 +10,7 @@
     "dev": "run-p watch server",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "check-vulnerabilities": "snyk test",
-    "lint-fix": "eslint . --fix"
+    "check-vulnerabilities": "snyk test"
   },
   "dependencies": {
     "babel-eslint": "^8.2.2",
