@@ -4,18 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run lint",
     "server": "babel-node server.js",
     "watch": "watchify web/index.js -o dist/bundle.js -t babelify --debug --verbose",
     "dev": "run-p watch server",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
-
+    "lint-fix": "eslint . --fix",
+    "check-vulnerabilities": "snyk test"
   },
   "dependencies": {
     "babel-eslint": "^8.2.2",
     "chart.js": "^2.7.2",
-    "eslint": "^4.18.2",
     "express": "^4.16.2",
     "express-ws": "^3.0.0",
     "moment": "^2.20.1",
@@ -33,7 +32,10 @@
     "babel-preset-stage-0": "^6.24.1",
     "babelify": "^8.0.0",
     "browserify": "^16.1.0",
+    "eslint": "^4.18.2",
+    "eslint-plugin-security": "^1.4.0",
     "npm-run-all": "^4.1.2",
+    "snyk": "^1.69.10",
     "watchify": "^3.10.0"
   },
   "author": "Felix Gonschorek <felix@netzgut.net>",
