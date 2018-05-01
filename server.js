@@ -59,7 +59,7 @@ app.get('/chartdata/rain', charts.builder(db, chartsDefinition.TYPE_RAIN))
 
 app.ws('/echo', echoHandler)
 app.use('/static', express.static('dist'))
-app.use('/styles', express.static(__dirname + '/styles'))
+app.use('/public', express.static(__dirname + '/public'))
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
@@ -75,8 +75,7 @@ const broadcast = (data) => {
     if (connection.readyState === 1) {
       console.log(`[broadcast] sending  ${data} to ${key}`)
       connection.send(data)
-    }
-    else {
+    } else {
       console.log(`[broadcast] client ${key} not connected  ${connection.readyState}`)
     }
   })
