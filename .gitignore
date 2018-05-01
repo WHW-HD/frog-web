@@ -3,3 +3,4 @@ node_modules
 db/anemo.db
 db/anemo.db-journal
 dist/bundle.js
+.vscode/
