@@ -16,7 +16,7 @@
 </head>
 
 <header>
-  <nav>
+  <nav id="main">
     <ul>
       <li>
         <span>Home</span>
@@ -24,12 +24,14 @@
       <li>
         <a href="#anemo">Aktuelles Wetter</a>
       </li>
+      <!--
       <li>
-        <a href="#statics">Windstatistiken</a>
+        <a href="#statistics">Windstatistiken</a>
       </li>
       <li>
         <a href="#vorhersage">Vorhersage</a>
       </li>
+    -->
       <li>
         <a href="#sunset">Sonnenaufgang</a>
       </li>
@@ -39,16 +41,15 @@
 
 <body>
   <div class="container">
-    <div id="anemo" class="row">
+    <div id="anemo" class="row sunset">
       {{> partials/anemo}}
     </div>
 
-    <div id="statistics" class="row">
+    <div id="statistics" class="row hidediv">
       {{> partials/statistics}}
     </div>
 
-
-    <div id="vorhersage">
+    <div id="vorhersage" class="hidediv">
       {{> partials/forecast}}
     </div>
 
@@ -68,6 +69,25 @@
   <script src="static/bundle.js"></script>
   <script src="public/js/toggler.js"></script>
 
+
+  <script>
+    // Not a ton of code, but hard to
+    const nav = document.querySelector('#main');
+    let topOfNav = nav.offsetTop;
+
+    function fixNav() {
+      if (window.scrollY >= topOfNav) {
+        document.body.style.paddingTop = nav.offsetHeight + 'px';
+        document.body.classList.add('fixed-nav');
+      } else {
+        document.body.classList.remove('fixed-nav');
+        document.body.style.paddingTop = 0;
+      }
+    }
+
+    window.addEventListener('scroll', fixNav);
+
+  </script>
 </body>
 
 </html>

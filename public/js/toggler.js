@@ -26,5 +26,5 @@ window.addEventListener('keyup', (e) => {
     default:
       break
   }
-  console.log(pressed)
+  //console.log(pressed)
 })
