@@ -26,14 +26,10 @@ socket.onmessage = function(event) {
     //
   } else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
-    console.log('MAA', maa.statistics().tendency)
-    $('#windspeed').html(
-      maa.average().toFixed(1) +
-        ' km/h   (Tendenz:' +
-        maa.statistics().tendency.toFixed(1) +
-        ' km/h)'
-    )
+    console.log('MAA', maa.statistics())
+    let sign = maa.statistics().tendency > maa.average() ? 'zunehmed' : 'abnehmend'
 
+    $('#windspeed').html(maa.average().toFixed(2) + ' km/h   (' + sign + ')')
     //
   } else if (data[0] == 'anemo/rain') {
     $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
