@@ -32,6 +32,20 @@ div.hidediv {
   display: none
 }
 
+
+#tendency-rose {
+  width: 120px;
+  height: 120px;
+  border-right: 60px solid gold;
+  border-top: 60px solid #bada55;
+  border-left: 60px solid #bada55;
+  border-bottom: 60px solid #bada55;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+
 .sunset {
   background-color: rgb(242, 242, 242);
   margin: 5px;

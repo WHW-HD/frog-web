@@ -22,11 +22,15 @@ socket.onmessage = function(event) {
   if (data[0] == 'anemo/windvane') {
     mav.add(parseFloat(data[1]))
     console.log('MAV', mav.statistics())
-    $('#windvane').css('transform', 'rotate(' + (mav.average() - 90) + 'deg)')
+    $('#tendency-rose').css('transform', 'rotate(' + (mav.statistics().tendency - 90) + 'deg)')
+    $('#windvane').css(
+      'transform',
+      'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
+    )
     //
   } else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
-    console.log('MAA', maa.statistics())
+    //console.log('MAA', maa.statistics())
     let sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abnehmend'
     const kmh = maa.average()
     const knoten = kmh / 1.852
