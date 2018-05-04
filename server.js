@@ -47,9 +47,11 @@ app.get('/', (req, res) => {
     data[prop + '_diff'] = date.fromNow()
   }
   data['date'] = moment().format('DD. MMM YYYY')
-  data.sunsetHeader = `Sonnenauf- und Untergang für
-  <a href="http://maps.google.de/maps?q=${LAT},${LON}"    target="_blank"> Heidelberg
-  </a>, den ${data.date}`
+  data.sunsetHeader = `
+    Sonnenauf- und Untergang für 
+    <a href="http://maps.google.de/maps?q=${LAT},${LON}" target="_blank">Heidelberg</a>, 
+    den ${data.date}
+  `
   res.render('index', data)
 })
 
