@@ -25,12 +25,12 @@ socket.onmessage = function(event) {
     $('#windvane').css('transform', 'rotate(' + (mav.average() - 90) + 'deg)')
     //
   } else if (data[0] == 'anemo/anemo') {
-    const kmh = parseFloat(data[1])
-    maa.add(kmh)
+    maa.add(parseFloat(data[1]))
     console.log('MAA', maa.statistics())
     let sign = maa.statistics().tendency > maa.average() ? 'zunehmed' : 'abnehmend'
+    const kmh = maa.average()
     const knoten = (kmh/1.852)
-    $('#windspeed').html(maa.average().toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Knoten (' + sign + ')')
+    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Knoten (' + sign + ')')
     //
   } else if (data[0] == 'anemo/rain') {
     $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
