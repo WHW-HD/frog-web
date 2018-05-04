@@ -47,7 +47,7 @@ const rainChart = new Chart(rainChartCtx, chartDefinition.rainChartDefintion)
 
 //console.log('anemochart', anemoChart)
 const updateCharts = () => {
-  const updateInterval = 5000
+  const updateInterval = 1000 * 60 * 5 // 5 minutes
   //console.log('anemochart', anemoChart)
   let ic = 3
   jQuery.get(
