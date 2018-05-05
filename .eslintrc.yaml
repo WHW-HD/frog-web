@@ -15,6 +15,7 @@ rules:
   indent: 
     - warn
     - 2 # use 2 spaces for indentation
+    - "SwitchCase": 1
   linebreak-style: 
     - warn
     - "unix" # use "\n" for line breaks
