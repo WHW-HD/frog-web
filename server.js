@@ -77,7 +77,8 @@ const broadcast = (data) => {
     if (connection.readyState === 1) {
       console.log(`[broadcast] sending  ${data} to ${key}`)
       connection.send(data)
-    } else {
+    }
+    else {
       console.log(`[broadcast] client ${key} not connected  ${connection.readyState}`)
     }
   })

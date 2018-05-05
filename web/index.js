@@ -28,7 +28,8 @@ socket.onmessage = function(event) {
       'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
     )
     //
-  } else if (data[0] == 'anemo/anemo') {
+  }
+  else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
     //console.log('MAA', maa.statistics())
     let sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abnehmend'
@@ -38,7 +39,8 @@ socket.onmessage = function(event) {
       kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Knoten (' + sign + ')'
     )
     //
-  } else if (data[0] == 'anemo/rain') {
+  }
+  else if (data[0] == 'anemo/rain') {
     $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
     //
   }
