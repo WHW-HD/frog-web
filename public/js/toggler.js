@@ -2,7 +2,7 @@
 //
 const sunset = document.querySelector('#sunset')
 const forecast = document.querySelector('#vorhersage')
-const statics = document.querySelector('#statistics')
+const statistics = document.querySelector('#statistics')
 
 const pressed = []
 const secretCode = ['sunset', 'forecast', 'statistics']
