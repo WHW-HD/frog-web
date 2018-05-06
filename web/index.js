@@ -40,25 +40,27 @@ socket.onmessage = function(event) {
     )
     //
   }
+  /*
   else if (data[0] == 'anemo/rain') {
     $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
     //
   }
+  */
 }
 
 const anemoChartCtx = document.getElementById('anemoChart').getContext('2d')
 const vaneChartCtx = document.getElementById('vaneChart').getContext('2d')
-const rainChartCtx = document.getElementById('rainChart').getContext('2d')
+//const rainChartCtx = document.getElementById('rainChart').getContext('2d')
 
 const anemoChart = new Chart(anemoChartCtx, chartDefinition.anemoChartDefinition)
 const vaneChart = new Chart(vaneChartCtx, chartDefinition.vaneChartDefinition)
-const rainChart = new Chart(rainChartCtx, chartDefinition.rainChartDefintion)
+//const rainChart = new Chart(rainChartCtx, chartDefinition.rainChartDefintion)
 
 //console.log('anemochart', anemoChart)
 const updateCharts = () => {
   const updateInterval = 1000 * 60 * 5 // 5 minutes
   //console.log('anemochart', anemoChart)
-  let ic = 3
+  let ic = 2
   jQuery.get(
     document.location.protocol + '//' + document.location.host + '/chartdata/anemo',
     function(data) {
@@ -77,6 +79,7 @@ const updateCharts = () => {
       if (ic == 0) setTimeout(updateCharts, updateInterval)
     }
   )
+  /*
   jQuery.get(
     document.location.protocol + '//' + document.location.host + '/chartdata/rain',
     function(data) {
@@ -86,6 +89,7 @@ const updateCharts = () => {
       if (ic == 0) setTimeout(updateCharts, updateInterval)
     }
   )
+  */
 }
 
 updateCharts()

@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 
 app.get('/chartdata/anemo', charts.builder(db, chartsDefinition.TYPE_ANEMO))
 app.get('/chartdata/vane', charts.builder(db, chartsDefinition.TYPE_VANE))
-app.get('/chartdata/rain', charts.builder(db, chartsDefinition.TYPE_RAIN))
+//app.get('/chartdata/rain', charts.builder(db, chartsDefinition.TYPE_RAIN))
 
 app.ws('/echo', echoHandler)
 app.use('/static', express.static('dist'))
