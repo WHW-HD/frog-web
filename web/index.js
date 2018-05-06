@@ -1,5 +1,6 @@
 import moment from 'moment'
 import Chart from 'chart.js'
+import d2d from 'degrees-to-direction'
 
 const chartDefinition = require('../lib/chart-definition')
 const MovingAverage = require('../lib/movingaverage_class')
@@ -21,7 +22,10 @@ socket.onmessage = function(event) {
 
   if (data[0] == 'anemo/windvane') {
     mav.add(parseFloat(data[1]))
+    const degrees = mav.average()
+    const direction = d2d(degrees)
     console.log('MAV', mav.statistics())
+    $('#windvane-label').html(direction)
     $('#tendency-rose').css('transform', 'rotate(' + (mav.statistics().tendency - 90) + 'deg)')
     $('#windvane').css(
       'transform',
