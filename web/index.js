@@ -93,3 +93,10 @@ const updateCharts = () => {
 }
 
 updateCharts()
+
+// button handler
+jQuery(function($) {
+  $('#toggle-extended-sunset').click(function(event) {
+    $('.fn-extended-sunset').toggle();
+  });
+});

@@ -1,21 +1,21 @@
 <h3>{{{sunsetHeader}}}</h3>
 <br />
 <table class="table table-condensed">
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Astronomische Morgendämmerung:</strong>
     </td>
     <td>{{astronomicalDawn}} Uhr</td>
     <td>{{astronomicalDawn_diff}}</td>
   </tr>
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Nautische Morgendämmerung:</strong>
     </td>
     <td>{{nauticalDawn}} Uhr</td>
     <td>{{nauticalDawn_diff}}</td>
   </tr>
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Zivile Morgendämmerung:</strong>
     </td>
@@ -43,25 +43,30 @@
     <td>{{sunset}} Uhr</td>
     <td>{{sunset_diff}}</td>
   </tr>
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Zivile Abenddämmerung:</strong>
     </td>
     <td>{{nauticalDusk}} Uhr</td>
     <td>{{nauticalDusk_diff}}</td>
   </tr>
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Nautische Abenddämmerung:</strong>
     </td>
     <td>{{nauticalDusk}} Uhr</td>
     <td>{{nauticalDusk_diff}}</td>
   </tr>
-  <tr>
+  <tr class="fn-extended-sunset">
     <td>
       <strong>Astronomische Abenddämmerung:</strong>
     </td>
     <td>{{astronomicalDusk}} Uhr</td>
     <td>{{astronomicalDusk_diff}}</td>
+  </tr>
+  <tr>
+   <td colspan="3">
+    <a href="#" id="toggle-extended-sunset" class="btn btn-primary" data-toggle="button">Erweiterte Infos</a>
+   </td>
   </tr>
 </table>
