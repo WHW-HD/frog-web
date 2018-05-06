@@ -55,8 +55,8 @@ app.get('/', (req, res) => {
   res.render('index', data)
 })
 
-app.get('/chartdata/anemo', charts.builder(db, chartsDefinition.TYPE_ANEMO))
-app.get('/chartdata/vane', charts.builder(db, chartsDefinition.TYPE_VANE))
+app.get('/chartdata/anemo', charts.handleChart(chartsDefinition.TYPE_ANEMO))
+app.get('/chartdata/vane', charts.handleChart(chartsDefinition.TYPE_VANE))
 //app.get('/chartdata/rain', charts.builder(db, chartsDefinition.TYPE_RAIN))
 
 app.ws('/echo', echoHandler)
