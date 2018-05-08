@@ -32,8 +32,7 @@ socket.onmessage = function(event) {
       'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
     )
     //
-  }
-  else if (data[0] == 'anemo/anemo') {
+  } else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
     //console.log('MAA', maa.statistics())
     let sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abnehmend'
@@ -99,8 +98,14 @@ const updateCharts = () => {
 updateCharts()
 
 // button handler
+
 jQuery(function($) {
+  let sunsetButtonTextExpanded = false
   $('#toggle-extended-sunset').click(function(event) {
-    $('.fn-extended-sunset').toggle();
-  });
-});
+    $('.fn-extended-sunset').toggle()
+    $(this).html(
+      sunsetButtonTextExpanded ? 'Erweiterte Infos anzeigen' : 'Erweiterte Infos verbergen'
+    )
+    sunsetButtonTextExpanded = !sunsetButtonTextExpanded
+  })
+})
