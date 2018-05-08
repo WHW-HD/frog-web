@@ -38,9 +38,7 @@ socket.onmessage = function(event) {
     let sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abnehmend'
     const kmh = maa.average()
     const knoten = kmh / 1.852
-    $('#windspeed').html(
-      kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Knoten (' + sign + ')'
-    )
+    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Kn (' + sign + ')')
     //
   }
   /*
