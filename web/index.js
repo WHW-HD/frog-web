@@ -15,7 +15,7 @@ socket.onopen = function(event) {
 const av = []
 const mav = new MovingAverage(av, 100)
 const aa = []
-const maa = new MovingAverage(aa, 30)
+const maa = new MovingAverage(aa, 100)
 
 socket.onmessage = function(event) {
   const data = event.data.split(':')
@@ -34,11 +34,22 @@ socket.onmessage = function(event) {
     //
   } else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
-    //console.log('MAA', maa.statistics())
-    let sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abnehmend'
+    console.log('MAA', maa.statistics())
+
+    let sign = ''
+
+    var x = Math.abs(maa.statistics().tendency - maa.average()) - 0.5 * maa.statistics().variance
+    var y = Math.abs(maa.statistics().tendency - maa.average()) - 1.5 * maa.statistics().variance
+    if (x > 0) {
+      sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abflauend'
+    }
+    if (y > 0) {
+      sign = maa.statistics().tendency > maa.average() ? 'Böen' : 'stark abflauend'
+    }
+
     const kmh = maa.average()
     const knoten = kmh / 1.852
-    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' Kn (' + sign + ')')
+    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ' + sign + '')
     //
   }
   /*
