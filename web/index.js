@@ -12,6 +12,67 @@ socket.onopen = function(event) {
   socket.send('hello from ' + navigator.userAgent)
 }
 
+let init = false
+const windDirData = []
+const maWindDirData = new MovingAverage(windDirData, 100)
+let linearData = maWindDirData.linearData()
+var speedData = {
+  datasets: [
+    {
+      label: 'Winddreher relativ zur Hauptwindrichtung',
+      data: linearData,
+      backgroundColor: '#0144ee',
+      borderColor: '#0144ee',
+      pointRadius: 0,
+      fill: true
+    }
+  ]
+}
+
+var chartOptions = {
+  legend: {
+    display: true,
+    position: 'top'
+  },
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: false,
+          suggestedMin: -10,
+          suggestedMax: 10
+        }
+      }
+    ],
+    xAxes: [
+      {
+        type: 'linear',
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 100,
+          stepsize: 20
+        }
+      }
+    ]
+  },
+  elements: {
+    line: {
+      tension: 0 // disables bezier curves
+    }
+  },
+  animation: false
+}
+
+function myChart(text) {
+  return
+  new Chart(text, {
+    type: 'line',
+    data: speedData,
+    options: chartOptions
+  })
+}
+
 const av = []
 const mav = new MovingAverage(av, 100)
 const aa = []
@@ -31,14 +92,17 @@ socket.onmessage = function(event) {
       'transform',
       'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
     )
-    //
-  } else if (data[0] == 'anemo/anemo') {
-    maa.add(parseFloat(data[1]))
-    console.log('MAA', maa.statistics())
 
     // Wind direction information
     var winddirDiff = mav.statistics().tendency - mav.average()
     $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
+
+    maWindDirData.add(winddirDiff)
+
+    //
+  } else if (data[0] == 'anemo/anemo') {
+    maa.add(parseFloat(data[1]))
+    console.log('MAA', maa.statistics())
 
     // Wind speed information
     let sign = ''
@@ -55,14 +119,33 @@ socket.onmessage = function(event) {
     const knoten = kmh / 1.852
     $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ')
     $('#windspeedComment').html(sign)
+
     //
   }
+
   /*
   else if (data[0] == 'anemo/rain') {
     $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
     //
   }
   */
+}
+
+const updateMyChart = () => {
+  linearData = maWindDirData.linearData()
+  speedData.datasets[0].data = linearData
+  var speedCanvas = document.getElementById('windstats')
+  const mychart = new Chart(speedCanvas, {
+    type: 'line',
+    data: speedData,
+    options: chartOptions
+  })
+  setTimeout(updateMyChart, 5000)
+}
+
+if (!init) {
+  updateMyChart()
+  init = true
 }
 
 const anemoChartCtx = document.getElementById('anemoChart').getContext('2d')
@@ -73,7 +156,6 @@ const anemoChart = new Chart(anemoChartCtx, chartDefinition.anemoChartDefinition
 const vaneChart = new Chart(vaneChartCtx, chartDefinition.vaneChartDefinition)
 //const rainChart = new Chart(rainChartCtx, chartDefinition.rainChartDefintion)
 
-//console.log('anemochart', anemoChart)
 const updateCharts = () => {
   const updateInterval = 1000 * 60 * 5 // 5 minutes
   //console.log('anemochart', anemoChart)
@@ -123,3 +205,5 @@ jQuery(function($) {
     sunsetButtonTextExpanded = !sunsetButtonTextExpanded
   })
 })
+
+function myChart() {}
