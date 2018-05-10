@@ -44,6 +44,7 @@ div.hidediv {
   border-top-right-radius: 60px;
   border-bottom-left-radius: 60px;
   border-bottom-right-radius: 60px;
+  transition: ease-in-out 3s;
 }
 
 .sunset {
