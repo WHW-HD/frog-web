@@ -36,11 +36,11 @@ socket.onmessage = function(event) {
     maa.add(parseFloat(data[1]))
     console.log('MAA', maa.statistics())
 
-    // Wind spped information
+    // Wind direction information
     var winddirDiff = mav.statistics().tendency - mav.average()
     $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
 
-    // Wind direction information
+    // Wind speed information
     let sign = ''
     var x = Math.abs(maa.statistics().tendency - maa.average()) - 0.5 * maa.statistics().variance
     var y = Math.abs(maa.statistics().tendency - maa.average()) - 1.5 * maa.statistics().variance
