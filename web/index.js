@@ -31,14 +31,15 @@ socket.onmessage = function(event) {
       'transform',
       'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
     )
-    //
-  } else if (data[0] == 'anemo/anemo') {
-    maa.add(parseFloat(data[1]))
-    console.log('MAA', maa.statistics())
 
     // Wind direction information
     var winddirDiff = mav.statistics().tendency - mav.average()
     $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
+
+    //
+  } else if (data[0] == 'anemo/anemo') {
+    maa.add(parseFloat(data[1]))
+    console.log('MAA', maa.statistics())
 
     // Wind speed information
     let sign = ''
