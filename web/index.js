@@ -36,8 +36,12 @@ socket.onmessage = function(event) {
     maa.add(parseFloat(data[1]))
     console.log('MAA', maa.statistics())
 
-    let sign = ''
+    // Wind spped information
+    var winddirDiff = mav.statistics().tendency - mav.average()
+    $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
 
+    // Wind direction information
+    let sign = ''
     var x = Math.abs(maa.statistics().tendency - maa.average()) - 0.5 * maa.statistics().variance
     var y = Math.abs(maa.statistics().tendency - maa.average()) - 1.5 * maa.statistics().variance
     if (x > 0) {
@@ -49,7 +53,8 @@ socket.onmessage = function(event) {
 
     const kmh = maa.average()
     const knoten = kmh / 1.852
-    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ' + sign + '')
+    $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ')
+    $('#windspeedComment').html(sign)
     //
   }
   /*
