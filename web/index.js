@@ -14,13 +14,14 @@ socket.onopen = function(event) {
 
 let init = false
 const windDirData = []
-const maWindDirData = new MovingAverage(windDirData, 100)
-let linearData = maWindDirData.linearData()
-var speedData = {
+const maWindDirData = new MovingAverage(windDirData, 200)
+let linearDirData = maWindDirData.linearData()
+
+var dirData = {
   datasets: [
     {
-      label: 'Winddreher relativ zur Hauptwindrichtung',
-      data: linearData,
+      label: 'Winddreher (°) relativ zur Hauptwindrichtung',
+      data: linearDirData,
       backgroundColor: '#0144ee',
       borderColor: '#0144ee',
       pointRadius: 0,
@@ -29,7 +30,7 @@ var speedData = {
   ]
 }
 
-var chartOptions = {
+var dirChartOptions = {
   legend: {
     display: true,
     position: 'top'
@@ -50,8 +51,8 @@ var chartOptions = {
         ticks: {
           beginAtZero: true,
           min: 0,
-          max: 100,
-          stepsize: 20
+          max: 200,
+          stepsize: 40
         }
       }
     ]
@@ -64,12 +65,73 @@ var chartOptions = {
   animation: false
 }
 
+const windspeedData = []
+const maWindspeedData = new MovingAverage(windspeedData, 200)
+let linearWindspeedData = maWindspeedData.linearData()
+
+var windspeedChartData = {
+  datasets: [
+    {
+      label: 'Windstärken (km/h) relativ zum mittleren Wind',
+      data: linearWindspeedData,
+      backgroundColor: '#0144ee',
+      borderColor: '#0144ee',
+      pointRadius: 0,
+      fill: true
+    }
+  ]
+}
+
+var windspeedChartOptions = {
+  legend: {
+    display: true,
+    position: 'top'
+  },
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: false,
+          suggestedMin: -1,
+          suggestedMax: 1
+        }
+      }
+    ],
+    xAxes: [
+      {
+        type: 'linear',
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 200,
+          stepsize: 40
+        }
+      }
+    ]
+  },
+  elements: {
+    line: {
+      tension: 0 // disables bezier curves
+    }
+  },
+  animation: false
+}
+
+function windspeedChart(text) {
+  return
+  new Chart(text, {
+    type: 'line',
+    data: windspeedChartData,
+    options: windspeedChartOptions
+  })
+}
+
 function myChart(text) {
   return
   new Chart(text, {
     type: 'line',
-    data: speedData,
-    options: chartOptions
+    data: dirData,
+    options: dirChartOptions
   })
 }
 
@@ -98,7 +160,6 @@ socket.onmessage = function(event) {
     $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
 
     maWindDirData.add(winddirDiff)
-
     //
   } else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
@@ -120,6 +181,7 @@ socket.onmessage = function(event) {
     $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ')
     $('#windspeedComment').html(sign)
 
+    maWindspeedData.add(maa.statistics().tendency - maa.average())
     //
   }
 
@@ -132,19 +194,32 @@ socket.onmessage = function(event) {
 }
 
 const updateMyChart = () => {
-  linearData = maWindDirData.linearData()
-  speedData.datasets[0].data = linearData
-  var speedCanvas = document.getElementById('windstats')
-  const mychart = new Chart(speedCanvas, {
+  linearDirData = maWindDirData.linearData()
+  dirData.datasets[0].data = linearDirData
+  var dirCanvas = document.getElementById('windstats')
+  const mychart = new Chart(dirCanvas, {
     type: 'line',
-    data: speedData,
-    options: chartOptions
+    data: dirData,
+    options: dirChartOptions
   })
   setTimeout(updateMyChart, 5000)
 }
 
+const updateWindspeedChart = () => {
+  linearWindspeedData = maWindspeedData.linearData()
+  windspeedChartData.datasets[0].data = linearWindspeedData
+  var windspeedCanvas = document.getElementById('windspeedstats')
+  const windspeedChart = new Chart(windspeedCanvas, {
+    type: 'line',
+    data: windspeedChartData,
+    options: windspeedChartOptions
+  })
+  setTimeout(updateWindspeedChart, 5000)
+}
+
 if (!init) {
   updateMyChart()
+  updateWindspeedChart()
   init = true
 }
 
