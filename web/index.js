@@ -3,7 +3,8 @@ import Chart from 'chart.js'
 import d2d from 'degrees-to-direction'
 
 const chartDefinition = require('../lib/chart-definition')
-const MovingAverage = require('../lib/movingaverage_class')
+const MovingAverage = require('../lib/movingaverage')
+const WindAverage = require('../lib/windaverage')
 
 console.log('WHW ANEMOMETER')
 
@@ -22,8 +23,8 @@ var dirData = {
     {
       label: 'Winddreher (°) relativ zur Hauptwindrichtung',
       data: linearDirData,
-      backgroundColor: '#0144ee',
-      borderColor: '#0144ee',
+      backgroundColor: 'gold',
+      borderColor: 'gold',
       pointRadius: 0,
       fill: true
     }
@@ -136,7 +137,7 @@ function myChart(text) {
 }
 
 const av = []
-const mav = new MovingAverage(av, 100)
+const mav = new WindAverage(av, 100)
 const aa = []
 const maa = new MovingAverage(aa, 100)
 
@@ -144,53 +145,48 @@ socket.onmessage = function(event) {
   const data = event.data.split(':')
 
   if (data[0] == 'anemo/windvane') {
+    // Wind direction
     mav.add(parseFloat(data[1]))
-    const degrees = mav.average()
+    const dirStats = mav.statistics()
+    console.log('MAV', dirStats)
+    const degrees = dirStats.average //mav.average()
     const direction = d2d(degrees)
-    console.log('MAV', mav.statistics())
+
     $('#windvane-label').html(direction)
-    $('#tendency-rose').css('transform', 'rotate(' + (mav.statistics().tendency - 90) + 'deg)')
-    $('#windvane').css(
-      'transform',
-      'rotate(' + (mav.average() - mav.statistics().tendency) + 'deg)'
-    )
+    $('#tendency-rose').css('transform', 'rotate(' + (dirStats.tendency - 90) + 'deg)')
+    $('#windvane').css('transform', 'rotate(' + (dirStats.average - dirStats.tendency) + 'deg)')
 
     // Wind direction information
-    var winddirDiff = mav.statistics().tendency - mav.average()
+    var winddirDiff = dirStats.tendency - dirStats.average
     $('#winddir').html('Winddreher: ' + winddirDiff.toFixed(0) + '°')
 
-    maWindDirData.add(winddirDiff)
+    maWindDirData.add(dirStats.tendency - dirStats.average)
     //
-  } else if (data[0] == 'anemo/anemo') {
+  }
+  else if (data[0] == 'anemo/anemo') {
     maa.add(parseFloat(data[1]))
-    console.log('MAA', maa.statistics())
+    const windStats = maa.statistics()
+    console.log('MAA', windStats)
 
     // Wind speed information
     let sign = ''
-    var x = Math.abs(maa.statistics().tendency - maa.average()) - 0.5 * maa.statistics().variance
-    var y = Math.abs(maa.statistics().tendency - maa.average()) - 1.5 * maa.statistics().variance
+    var x = Math.abs(windStats.tendency - windStats.average) - 0.5 * windStats.averageDev
+    var y = Math.abs(windStats.tendency - windStats.average) - 1.5 * windStats.averageDev
     if (x > 0) {
-      sign = maa.statistics().tendency > maa.average() ? 'zunehmend' : 'abflauend'
+      sign = windStats.tendency > windStats.average ? 'zunehmend' : 'abflauend'
     }
     if (y > 0) {
-      sign = maa.statistics().tendency > maa.average() ? 'Böen' : 'stark abflauend'
+      sign = windStats.tendency > windStats.average ? 'Böen' : 'stark abflauend'
     }
 
-    const kmh = maa.average()
+    const kmh = windStats.average
     const knoten = kmh / 1.852
     $('#windspeed').html(kmh.toFixed(1) + ' km/h  - ' + knoten.toFixed(1) + ' kn ')
     $('#windspeedComment').html(sign)
 
-    maWindspeedData.add(maa.statistics().tendency - maa.average())
+    maWindspeedData.add(windStats.tendency - windStats.average)
     //
   }
-
-  /*
-  else if (data[0] == 'anemo/rain') {
-    $('#rain').html('Letzter Regen: ' + moment(parseInt(data[1])).fromNow())
-    //
-  }
-  */
 }
 
 const updateMyChart = () => {
@@ -225,11 +221,8 @@ if (!init) {
 
 const anemoChartCtx = document.getElementById('anemoChart').getContext('2d')
 const vaneChartCtx = document.getElementById('vaneChart').getContext('2d')
-//const rainChartCtx = document.getElementById('rainChart').getContext('2d')
-
 const anemoChart = new Chart(anemoChartCtx, chartDefinition.anemoChartDefinition)
 const vaneChart = new Chart(vaneChartCtx, chartDefinition.vaneChartDefinition)
-//const rainChart = new Chart(rainChartCtx, chartDefinition.rainChartDefintion)
 
 const updateCharts = () => {
   const updateInterval = 1000 * 60 * 5 // 5 minutes
@@ -253,17 +246,6 @@ const updateCharts = () => {
       if (ic == 0) setTimeout(updateCharts, updateInterval)
     }
   )
-  /*
-  jQuery.get(
-    document.location.protocol + '//' + document.location.host + '/chartdata/rain',
-    function(data) {
-      rainChart.data = data
-      rainChart.update()
-      ic--
-      if (ic == 0) setTimeout(updateCharts, updateInterval)
-    }
-  )
-  */
 }
 
 updateCharts()
