@@ -38,7 +38,7 @@
     "eslint-plugin-security": "^1.4.0",
     "npm-run-all": "^4.1.2",
     "snyk": "^1.69.10",
-    "watchify": "^3.10.0"
+    "watchify": "^4.0.0"
   },
   "author": "Felix Gonschorek <felix@netzgut.net>",
   "license": "ISC"
