@@ -13,7 +13,7 @@
     "check-vulnerabilities": "snyk test"
   },
   "dependencies": {
-    "babel-eslint": "^8.2.2",
+    "babel-eslint": "^9.0.0",
     "chart.js": "^2.7.2",
     "degrees-to-direction": "^1.1.1",
     "express": "^4.16.2",
